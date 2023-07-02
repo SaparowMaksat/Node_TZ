@@ -14,6 +14,7 @@ const app = express()
 
 app.set('view engine', 'ejs')
 app.set('views', 'pages')
+app.use(express.json())
 
 app.use(
 	express.urlencoded({
@@ -40,9 +41,7 @@ app.post('/', async (req, res) => {
 })
 
 app.put('/:id', async (req, res) => {
-	console.log(req.params, req.body)
-
-	// await updateNote(req.params.id)
+	await updateNote(req.params.id, req.body.title)
 	res.render('index', {
 		title: 'Express App',
 		notes: await getNotes(),
